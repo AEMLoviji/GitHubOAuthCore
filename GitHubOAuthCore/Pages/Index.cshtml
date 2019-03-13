@@ -4,7 +4,38 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <div class="col-md-12">
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <a asp-action="Login" asp-controller="Account" class="btn btn-default">Log In using GitHub</a>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="@Model.GitHubAvatar" alt="" class="img-thumbnail" />
+                </div>
+                <div class="col-md-10">
+                    <h4>@Model.GitHubName</h4>
+                    <p>
+                        <b>Username:</b>
+                        <a target="_blank" href="@Model.GitHubUrl">@Model.GitHubLogin</a>
+                    </p>
+                    <p>
+                        <b>Email:</b>
+                        <span> @Model.GitHubEmail</span>
+                    </p>
+                    <p>
+                        <b>Bio:</b>
+                        <span>@Model.GitHubBio</span>
+                    </p>
+                    <p>
+                        <b>Created At:</b>
+                        <span> @Model.GitHubCreatedAt</span>
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
 </div>
